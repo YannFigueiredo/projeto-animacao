@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8"/>
+        <meta charset="UTF-8"/>
         <link rel="stylesheet" href="static/estilo.css"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
-        <script type="module" src="static/scripts.js"></script>
+        <!--script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r116/three.min.js"></script-->
+        <!--script type="module" src="static/scripts.js"></script-->
         <title>Animação</title> 
     </head>
     <body>
+        <script src="three.min.js"></script>
+        <script src="GLTFLoader.js"></script>
+        <script src="OrbitControls.js"></script>
         <script>
-            var cena = new THREE.Scene();
-            var LARGURA = window.innerWidth;
-            var ALTURA = window.innerHeight;
-            //var loader = new THREE.GLTFLoader();
+            let scene, camera, renderer; 
 
-            cena.background = new THREE.Color(0x002123);
+            //function init(){
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xFFCCAF);
 
-            //cena.setClearColor(0x002123);
+                //1º parâmetro é o campo de visão, 2º é o tamanho da janela (para os objetos não ficarem destorcidos),
+                //3º é a distância da lente com relação ao elemento, 4º é o limite de distância de renderização
+                camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 1, 5000);
 
-            //1º parâmetro é o campo de visão, 2º é o tamanho da janela (para os objetos não ficarem destorcidos),
-            //3º é a distância da lente com relação ao elemento, 4º é o limite de distância de renderização
-            var camera = new THREE.PerspectiveCamera(45, LARGURA/ALTURA, 1, 1000);
+                //camera.position.z = 600; //Profundidade
 
-            camera.position.z = 50; //Profundidade
+                camera.position.set(0, 100, 1000);
+                
+                //antilias é para evitar serrilhado no objeto renderizado
+                renderer = new THREE.WebGLRenderer({antialias:true}); //Instanciar objeto para renderização
 
-            //antilias é para evitar serrilhado no objeto renderizado
-            var renderer = new THREE.WebGLRenderer({antilias:true}); //Instanciar objeto para renderização
+                renderer.setSize(window.innerWidth, window.innerHeight);
 
-            renderer.setSize(LARGURA, ALTURA);
+                //Aplica o objeto no body para renderização
+                document.body.appendChild(renderer.domElement);
 
-            //Aplica o objeto no body para renderização
-            document.body.appendChild(renderer.domElement);
+                //var abint = new THREE.AmbientLight(0x555500);
+                //cena.add(abint);
 
-            //loader.load( 'models/scene.gltf', function ( gltf ) {
-            //    cena.add(gltf.scene);
-            //})
+                let loader = new THREE.GLTFLoader();
+                loader.load( 'scene.gltf', function (gltf) {
+                    skull = gltf.scene.children[0];
+                    skull.scale.set(0.5, 0.5, 0.5);
+                    scene.add(gltf.scene);
+                    
+                });
 
-            function animate(){
-                renderer.render(cena, camera);
+                function animate(){
+                    renderer.render(cena, camera);
+                    requestAnimationFrame(animate);
+                }
 
-                requestAnimationFrame(animate);
-            }
-
-            animate();
+                animate();
+                //init();
+            //}
         </script>
     </body>
 </html>
