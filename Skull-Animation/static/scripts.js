@@ -1,5 +1,6 @@
 function iniciar(){
     var scene, camera, renderer, skull;
+    var cores = [0xF8EF0A, 0xB163E6, 0x270709];
     
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x434246);
@@ -51,8 +52,17 @@ function iniciar(){
     });
 
     function minhaFuncao(){
-        hlight = new THREE.AmbientLight (0xB163E6,0.05);
-        scene.add(hlight);
+        //hlight = new THREE.AmbientLight (cores[Math.random],0.001);
+        //scene.add(hlight);
+        //hlight = new THREE.Color(cores[Math.random]);
+        //hlight.Color(cores[Math.random]);
+        //hlight.AmbientLight(cores[Math.random],0.5)
+        //scene.add(hlight);
+        //hlight = new THREE.AmbientLight (0xB163E6,0.05);
+        //scene.add(hlight);
+        scene.background = new THREE.Color(cores[Math.floor((Math.random() * cores.length))]);
+        //setTimeout(minhaFuncao2, 5000);
+        //scene.background.setColor
     }
     
     function animate() {
