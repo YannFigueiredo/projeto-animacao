@@ -3,56 +3,15 @@
     <head>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="static/estilo.css"/>
+        <script src="three.min.js"></script>
+        <script src="GLTFLoader.js"></script>
+        <script src="OrbitControls.js"></script>
+        <script src="static/scripts.js"></script>
         <!--script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r116/three.min.js"></script-->
         <!--script type="module" src="static/scripts.js"></script-->
         <title>Animação</title> 
     </head>
     <body>
-        <script src="three.min.js"></script>
-        <script src="GLTFLoader.js"></script>
-        <script src="OrbitControls.js"></script>
-        <script>
-            let scene, camera, renderer; 
-
-            //function init(){
-                scene = new THREE.Scene();
-                scene.background = new THREE.Color(0xFFCCAF);
-
-                //1º parâmetro é o campo de visão, 2º é o tamanho da janela (para os objetos não ficarem destorcidos),
-                //3º é a distância da lente com relação ao elemento, 4º é o limite de distância de renderização
-                camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 1, 5000);
-
-                //camera.position.z = 600; //Profundidade
-
-                camera.position.set(0, 100, 1000);
-                
-                //antilias é para evitar serrilhado no objeto renderizado
-                renderer = new THREE.WebGLRenderer({antialias:true}); //Instanciar objeto para renderização
-
-                renderer.setSize(window.innerWidth, window.innerHeight);
-
-                //Aplica o objeto no body para renderização
-                document.body.appendChild(renderer.domElement);
-
-                //var abint = new THREE.AmbientLight(0x555500);
-                //cena.add(abint);
-
-                let loader = new THREE.GLTFLoader();
-                loader.load( 'scene.gltf', function (gltf) {
-                    skull = gltf.scene.children[0];
-                    skull.scale.set(0.5, 0.5, 0.5);
-                    scene.add(gltf.scene);
-                    
-                });
-
-                function animate(){
-                    renderer.render(cena, camera);
-                    requestAnimationFrame(animate);
-                }
-
-                animate();
-                //init();
-            //}
-        </script>
+        <h1 id="h1-titulo" class="h1-titulo">--As voltas da vida resultam em um mesmo fim...</h1>
     </body>
 </html>

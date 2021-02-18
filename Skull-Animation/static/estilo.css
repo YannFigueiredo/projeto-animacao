@@ -1,6 +1,13 @@
-body {
+body{
     width: 100vw;
     height: 100vh;
     margin: 0;
     overflow: hidden;
-  }
+}
+
+#h1-titulo{
+  color: white;
+  background-color: #434246;
+  text-align: center;
+  margin: 0px;
+}
